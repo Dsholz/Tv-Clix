@@ -2,6 +2,14 @@
 #
 .DS_Store
 
+# lock files
+.lock
+
+# tests
+_tests_
+
+.gitignore
+
 # Xcode
 #
 build/
