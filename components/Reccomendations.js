@@ -13,7 +13,7 @@ class Reccomendations extends Component {
     this.props.getRecommendations(id)
       .then(data => {
         this.setState(() => ({
-          reccomended: data.results
+          reccomended: data.results ? data.results : []
         }))
       })
   }
@@ -36,7 +36,7 @@ class Reccomendations extends Component {
           />}
           horizontal={true}
           showsHorizontalScrollIndicator={false}
-          keyExtractor={item => `${item.id}ppclx`}
+          keyExtractor={item => item.id.toString()}
         />
       </View>
     )

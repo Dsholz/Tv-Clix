@@ -1,9 +1,10 @@
 import React from 'react'
 import { Text } from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
-import ShowPage from './tvshows/ShowPage'
 import Header from './Header'
 import TvShowsNavigator from './tvshows/TvShowsNavigator'
+import ItemPage from './ItemPage'
+import { getTvShow } from './Api/api'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -17,10 +18,11 @@ const TvShowsContainer = () => (
       component={TvShowsNavigator} />
     <Screen
       name='Show Page'
-      component={ShowPage}
       options={{
         header: () => <Text style={{ height: 0 }}></Text>
-      }} />
+      }}>
+      {props => <ItemPage category='Tv Show' getItem={getTvShow} {...props} />}
+    </Screen>
   </Navigator>
 )
 

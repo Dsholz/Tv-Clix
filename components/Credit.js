@@ -12,8 +12,10 @@ class Credit extends Component {
 
     this.props.getCredits(id)
       .then(data => {
+        const result = category === 'Cast' ? data.cast : data.crew
+
         this.setState(() => ({
-          creditData: category === 'Cast' ? data.cast : data.crew,
+          creditData: result ? result : [],
           showLoader: false
         }))
       })
@@ -37,7 +39,7 @@ class Credit extends Component {
                     source={{ uri: `https://image.tmdb.org/t/p/w185${item.profile_path}` }}
                     style={styles.img}
                   /> : <Image
-                    source={require('../no-image.png')}
+                    source={require('./no-image.png')}
                     style={styles.img}
                   />}
                 <Text style={{ fontSize: 15 }}>{item.name}</Text>
@@ -46,7 +48,7 @@ class Credit extends Component {
                 </Text>
               </View>
             }
-            keyExtractor={item => item.credit_id}
+            keyExtractor={item => item.credit_id.toString()}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
             extraData={creditData}

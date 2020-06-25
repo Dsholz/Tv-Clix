@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StatusBar, SectionList } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MovieSection from '../MovieSection'
-import SearchCategory from './SearchCategory'
+import SearchCategory from '../SearchCategory'
 import { MaterialCommunityIcons, FontAwesome, AntDesign } from '@expo/vector-icons';
 import { getUpcomingMovies, getMostPopularMovies, getNowPlayingMovies } from '../Api/api'
 import { searchMoviesApi } from '../Api/api'
@@ -41,6 +41,7 @@ const MoviesNavigator = () => (
     >
       {sections.map(section => (
         <Screen
+          key={section.name}
           name={section.name}
           options={{
             tabBarIcon: ({ focused }) => section.getIcon(focused),
@@ -53,7 +54,7 @@ const MoviesNavigator = () => (
         options={{
           tabBarIcon: ({ focused }) => <AntDesign name="search1" size={24} color={focused ? '#66C7D9' : '#D1D2D3'} />
         }}>
-        {props => <SearchCategory {...props} searchCategoryApi={searchMoviesApi} />}
+        {props => <SearchCategory category='Movies' {...props} searchCategoryApi={searchMoviesApi} />}
       </Screen>
     </Navigator>
   </View>

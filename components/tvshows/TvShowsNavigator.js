@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import MovieSection from '../MovieSection'
 import { searchTvShowsApi } from '../Api/api'
-import SearchCategory from '../movies/SearchCategory'
+import SearchCategory from '../SearchCategory'
 import { Feather, Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import { getPopularTvShows, getTopRatedTvShows, getTvShowsOnAir } from '../Api/api'
 
@@ -41,6 +41,7 @@ class TvShowsNavigator extends Component {
       >
         {sections.map(section => (
           <Screen
+            key={section.name}
             name={section.name}
             options={{
               tabBarIcon: ({ focused }) => section.getIcon(focused),

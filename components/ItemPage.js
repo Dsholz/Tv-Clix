@@ -1,38 +1,37 @@
 import React, { Component } from 'react'
 import { View, Text, Image, FlatList, StyleSheet, ScrollView, ActivityIndicator } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
-import Reccomendations from '../Reccomendations'
-import Credit from '../Credit'
-import { getMovie, getMovieCredits, getMovieReccomendations } from '../Api/api'
+import Reccomendations from './Reccomendations'
+import Credit from './Credit'
+import { getMovie, getMovieCredits, getMovieReccomendations } from './Api/api'
 
 class MoviePage extends Component {
   state = {
-    movie: {},
-    recommendedMovies: [],
+    item: {},
     showLoader: true
   }
 
   componentDidMount() {
     const { route } = this.props
 
-    getMovie(route.params.id)
-      .then(movie => {
-        getMovieReccomendations(route.params.id)
-          .then(data => {
-            this.setState(() => ({
-              movie,
-              recommendedMovies: data.results,
-              showLoader: false
-            }))
-          })
+    this.props.getItem(route.params.id)
+      .then(item => {
+        this.setState(() => ({
+          item,
+          showLoader: false
+        }))
       })
   }
 
   render() {
-    const { backdrop_path, genres, title, overview, budget,
-      release_date, revenue, runtime, vote_average } = this.state.movie
-    const { route, navigation } = this.props
     const { showLoader } = this.state
+    const { route, navigation, category } = this.props
+    const { backdrop_path, genres, overview, vote_average } = this.state.item
+    const title = category === 'Movies' ? this.state.item.title : this.state.item.name
+    const release_date = category === 'Movies' ? this.state.item.release_date : this.state.item.first_air_date
+    const runtime = category === 'Movies' ? this.state.item.runtime : this.state.item.episode_run_time
+    const budget = category === 'Movies' ? this.state.item.budget : this.state.item.number_of_seasons
+    const revenue = category === 'Movies' ? this.state.item.revenue : this.state.item.status
 
     return (
       <ScrollView>
@@ -52,7 +51,7 @@ class MoviePage extends Component {
                       <Text style={{ color: '#fff', fontSize: 16 }}>{item.name.toLowerCase()}</Text>
                     </View>)
                 }}
-                keyExtractor={genre => genre.id}
+                keyExtractor={genre => genre.id.toString()}
                 extraData={genres}
                 showsHorizontalScrollIndicator={false}
                 horizontal={true}
@@ -76,9 +75,21 @@ class MoviePage extends Component {
             </View>
             <View>
               <Text style={styles.movieInformationTitle}>Budget</Text>
-              <Text style={styles.movieInformationValue}>{(budget !== 0 && !showLoader) ? `$${budget}` : 'N / A'}</Text>
+              {category === 'Movies'
+                ? <Text style={styles.movieInformationValue}>
+                  {(budget !== 0 && !showLoader) ? `$${budget}` : 'N / A'}
+                </Text>
+                : <Text style={styles.movieInformationValue}>
+                  {budget ? budget : 'N / A'}
+                </Text>}
               <Text style={styles.movieInformationTitle}>Revenue</Text>
-              <Text style={styles.movieInformationValue}>{(revenue !== 0 && !showLoader) ? `$${revenue}` : 'N / A'}</Text>
+              {category === 'Movies'
+                ? <Text style={styles.movieInformationValue}>
+                  {(revenue !== 0 && !showLoader) ? `$${revenue}` : 'N / A'}
+                </Text>
+                : <Text style={styles.movieInformationValue}>
+                  {revenue ? revenue : 'N / A'}
+                </Text>}
             </View>
           </View>
 

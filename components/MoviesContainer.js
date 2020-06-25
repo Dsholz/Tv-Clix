@@ -1,9 +1,10 @@
 import React from 'react'
 import { Text } from 'react-native'
 import MoviesNavigator from './movies/MoviesNavigator'
-import MoviePage from './movies/MoviePage'
 import Header from './Header'
 import { createStackNavigator } from '@react-navigation/stack'
+import ItemPage from './ItemPage'
+import { getMovie } from './Api/api'
 
 const { Navigator, Screen } = createStackNavigator()
 
@@ -22,7 +23,7 @@ const MoviesContainer = () => {
         options={{
           header: () => <Text style={{ height: 0 }}></Text>
         }}>
-        {props => <MoviePage {...props} />}
+        {props => <ItemPage category='Movies' getItem={getMovie} {...props} />}
       </Screen>
     </Navigator>
   )

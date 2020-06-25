@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList, StyleSheet, ActivityIndicator, TextInput } from 'react-native'
-import CategoryItem from '../CategoryItem'
+import CategoryItem from './CategoryItem'
 import { FontAwesome5 } from '@expo/vector-icons'
 
 
