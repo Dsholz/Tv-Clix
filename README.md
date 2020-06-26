@@ -12,6 +12,8 @@ Android mobile application for information on movies and tv shows
 
 ## Installation
 
+Also the apk file of the application can be downloade from [here](https://expo.io/artifacts/9cbabe5a-d61a-47e3-9ddc-cbf94b5ca832) 
+
 Tv Clix can be downloaded through google play store on your android device.
 
 ### Development Installation
