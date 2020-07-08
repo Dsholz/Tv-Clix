@@ -45,7 +45,7 @@ class SearchMovies extends Component {
           style={styles.textInput}
           value={query}
           onChangeText={this.handleChange}
-          placeholder='Search Movies'
+          placeholder={category === 'Movies' ? 'Search Movies' : 'Search Tv Shows'}
         />
 
         {totalResults === 0 && query === ''

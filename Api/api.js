@@ -16,7 +16,7 @@ export const getNowPlayingMovies = () =>
     .then(res => res.json())
 
 export const getMovie = (id) =>
-  fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=en-US`)
+  fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&append_to_response=videos&language=en-US`)
     .then(res => res.json())
 
 export const getMovieCredits = (id) =>
@@ -45,7 +45,7 @@ export const getTopRatedTvShows = () =>
     .then(res => res.json())
 
 export const getTvShow = (id) =>
-  fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&language=en-US`)
+  fetch(`https://api.themoviedb.org/3/tv/${id}?api_key=${API_KEY}&append_to_response=videos&language=en-US`)
     .then(res => res.json())
 
 export const getTvShowCredit = (id) =>

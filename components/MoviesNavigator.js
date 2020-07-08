@@ -1,11 +1,10 @@
 import React from 'react'
-import { View, StatusBar, SectionList } from 'react-native'
+import { View, StatusBar } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import MovieSection from '../MovieSection'
-import SearchCategory from '../SearchCategory'
-import { MaterialCommunityIcons, FontAwesome, AntDesign } from '@expo/vector-icons';
-import { getUpcomingMovies, getMostPopularMovies, getNowPlayingMovies } from '../Api/api'
-import { searchMoviesApi } from '../Api/api'
+import MovieSection from './MovieSection'
+import SearchCategory from './SearchCategory'
+import { MaterialCommunityIcons, FontAwesome, AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { getUpcomingMovies, getMostPopularMovies, getNowPlayingMovies, searchMoviesApi } from '../Api/api'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 
@@ -26,7 +25,7 @@ const sections = [{
   name: 'In Theatres',
   data: getNowPlayingMovies,
   getIcon(focused) {
-    return (<AntDesign name="search1" size={24} color={focused ? '#66C7D9' : '#D1D2D3'} />)
+    return (<MaterialIcons name="theaters" size={24} color={focused ? '#66C7D9' : '#D1D2D3'} />)
   }
 }]
 

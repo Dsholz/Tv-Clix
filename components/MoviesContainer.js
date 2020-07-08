@@ -1,10 +1,10 @@
 import React from 'react'
 import { Text } from 'react-native'
-import MoviesNavigator from './movies/MoviesNavigator'
+import MoviesNavigator from './MoviesNavigator'
 import Header from './Header'
 import { createStackNavigator } from '@react-navigation/stack'
 import ItemPage from './ItemPage'
-import { getMovie } from './Api/api'
+import { getMovie } from '../Api/api'
 
 const { Navigator, Screen } = createStackNavigator()
 

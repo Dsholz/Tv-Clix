@@ -24,7 +24,7 @@ class Movie extends Component {
               source={{ uri: `https://image.tmdb.org/t/p/w300/${itemData.poster_path}` }}
               style={{ height: 270, width: 185, borderRadius: 4 }}
             /> : <Image
-              source={require('./no-image.png')}
+              source={require('../assets/no-image.png')}
               style={{ height: 270, width: 185, borderRadius: 4 }}
             />}
           <Text>{title.length < 20

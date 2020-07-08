@@ -39,7 +39,7 @@ class Credit extends Component {
                     source={{ uri: `https://image.tmdb.org/t/p/w185${item.profile_path}` }}
                     style={styles.img}
                   /> : <Image
-                    source={require('./no-image.png')}
+                    source={require('../assets/no-image.png')}
                     style={styles.img}
                   />}
                 <Text style={{ fontSize: 15 }}>{item.name}</Text>

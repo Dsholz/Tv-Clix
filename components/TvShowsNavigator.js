@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import MovieSection from '../MovieSection'
-import { searchTvShowsApi } from '../Api/api'
-import SearchCategory from '../SearchCategory'
+import MovieSection from './MovieSection'
+import SearchCategory from './SearchCategory'
 import { Feather, Ionicons, AntDesign, FontAwesome } from '@expo/vector-icons';
-import { getPopularTvShows, getTopRatedTvShows, getTvShowsOnAir } from '../Api/api'
+import { getPopularTvShows, getTopRatedTvShows, getTvShowsOnAir, searchTvShowsApi } from '../Api/api'
 
 const { Navigator, Screen } = createBottomTabNavigator()
 

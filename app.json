@@ -1,10 +1,15 @@
 {
-  "name": "tv-clix",
-  "displayName": "tv-clix",
+  "name": "Tv-Clix",
+  "icon": "./assests/TV-Clix-icon.jpg",
+  "displayName": "Tv-Clix",
   "expo": {
-    "name": "tv-clix",
+    "name": "Tv-Clix",
     "slug": "expo-template-bare",
     "version": "1.0.0",
+    "android": {
+      "package": "com.tvclix.tv_clix",
+      "versionCode": 1
+    },
     "platforms": [
       "ios",
       "android",

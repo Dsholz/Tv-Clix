@@ -4,13 +4,12 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import TvShowsContainer from './components/TvShowsContainer'
 import MoviesContainer from './components/MoviesContainer'
 import DrawerContent from './components/DrawerContent'
-import { Text } from 'react-native'
 
 const Drawer = createDrawerNavigator()
 
 const App = () => (
   <NavigationContainer>
-    <Drawer.Navigator>
+    <Drawer.Navigator drawerContent={(props) => <DrawerContent navigation={props.navigation} />}>
       <Drawer.Screen name='Movies' component={MoviesContainer} />
       <Drawer.Screen name='Tv Shows' component={TvShowsContainer} />
     </Drawer.Navigator>

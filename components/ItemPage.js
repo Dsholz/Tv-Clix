@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, Image, FlatList, StyleSheet, ScrollView, ActivityIndicator } from 'react-native'
+import {
+  View, Text, Image, FlatList, StyleSheet,
+  ScrollView, TouchableOpacity
+} from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
-import Reccomendations from './Reccomendations'
-import Credit from './Credit'
-import { getMovie, getMovieCredits, getMovieReccomendations } from './Api/api'
+import Details from './Details'
+
 
 class MoviePage extends Component {
   state = {
@@ -24,17 +26,18 @@ class MoviePage extends Component {
   }
 
   render() {
-    const { showLoader } = this.state
     const { route, navigation, category } = this.props
-    const { backdrop_path, genres, overview, vote_average } = this.state.item
-    const title = category === 'Movies' ? this.state.item.title : this.state.item.name
-    const release_date = category === 'Movies' ? this.state.item.release_date : this.state.item.first_air_date
-    const runtime = category === 'Movies' ? this.state.item.runtime : this.state.item.episode_run_time
-    const budget = category === 'Movies' ? this.state.item.budget : this.state.item.number_of_seasons
-    const revenue = category === 'Movies' ? this.state.item.revenue : this.state.item.status
+    const { backdrop_path, genres, title, name } = this.state.item
 
     return (
-      <ScrollView>
+      <ScrollView style={{ position: "relative" }}>
+        <View
+          style={{ position: "absolute", zIndex: 10, height: 50, paddingLeft: 7 }}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginTop: 12, width: 40, height: 50 }}>
+            <AntDesign name="arrowleft" size={30} color="#f7f7f7" />
+            <Text></Text>
+          </TouchableOpacity>
+        </View>
         <View style={{ flex: 1 }}>
           <View style={styles.containerPrimary}>
             <Image
@@ -42,7 +45,7 @@ class MoviePage extends Component {
               style={styles.img}
             />
             <View style={{ paddingLeft: 10, marginBottom: 10 }}>
-              <Text style={styles.movieTitle}>{title}</Text>
+              <Text style={styles.movieTitle}>{category === 'Movies' ? title : name}</Text>
               <FlatList
                 data={genres}
                 renderItem={({ item }) => {
@@ -59,55 +62,10 @@ class MoviePage extends Component {
             </View>
           </View>
 
-          <Text style={{ padding: 10 }}>
-            <AntDesign name="star" size={24} color="#D6B51B" />
-            <Text style={{ color: '#D6B51B', marginLeft: 10, fontSize: 18 }}>
-              {vote_average && !showLoader ? `${vote_average} / 10` : 'N / A'}
-            </Text>
-          </Text>
-
-          <View style={{ flexDirection: "row", marginTop: 10, paddingLeft: 40, paddingRight: 40, justifyContent: 'space-between' }}>
-            <View>
-              <Text style={styles.movieInformationTitle}>Released Date</Text>
-              <Text style={styles.movieInformationValue}>{release_date ? release_date : 'N / A'}</Text>
-              <Text style={styles.movieInformationTitle}>Runtime</Text>
-              <Text style={styles.movieInformationValue}>{runtime} mins</Text>
-            </View>
-            <View>
-              <Text style={styles.movieInformationTitle}>Budget</Text>
-              {category === 'Movies'
-                ? <Text style={styles.movieInformationValue}>
-                  {(budget !== 0 && !showLoader) ? `$${budget}` : 'N / A'}
-                </Text>
-                : <Text style={styles.movieInformationValue}>
-                  {budget ? budget : 'N / A'}
-                </Text>}
-              <Text style={styles.movieInformationTitle}>Revenue</Text>
-              {category === 'Movies'
-                ? <Text style={styles.movieInformationValue}>
-                  {(revenue !== 0 && !showLoader) ? `$${revenue}` : 'N / A'}
-                </Text>
-                : <Text style={styles.movieInformationValue}>
-                  {revenue ? revenue : 'N / A'}
-                </Text>}
-            </View>
-          </View>
-
-          <View style={{ padding: 10 }}>
-            <Text style={{ fontSize: 25 }}>Overview</Text>
-            {showLoader
-              ? <ActivityIndicator animating={showLoader} size={60} color="#66C7D9" />
-              : <Text style={{ fontSize: 22, fontWeight: '100', color: '#6b6b6b', fontStyle: 'italic' }}>{overview}</Text>}
-          </View>
-
-          <Credit id={route.params.id} category='Cast' getCredits={getMovieCredits} />
-
-          <Credit id={route.params.id} category='Crew' getCredits={getMovieCredits} />
-
-          <Reccomendations
+          <Details
             id={route.params.id}
-            category='Movies'
-            getRecommendations={getMovieReccomendations}
+            item={this.state.item}
+            category={category}
             navigation={navigation}
           />
         </View>
@@ -147,7 +105,15 @@ const styles = StyleSheet.create({
     marginRight: 10,
     padding: 6,
     borderRadius: 50
-  }
+  },
+  container: {
+    alignSelf: "stretch",
+    height: 300
+  },
+  player: {
+    alignSelf: 'stretch',
+    marginVertical: 10,
+  },
 })
 
 export default MoviePage
