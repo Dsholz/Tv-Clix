@@ -51,18 +51,18 @@ class Details extends Component {
             <Text style={styles.movieInformationTitle}>{category === 'Movies' ? 'Budget' : 'Seasons'}</Text>
             {category === 'Movies'
               ? <Text style={styles.movieInformationValue}>
-                {(budgetEdited !== 0 && !showLoader) ? `$${budgetEdited}` : 'N / A'}
+                {(budgetEdited !== 0 && budgetEdited !== undefined && !showLoader) ? `$${budgetEdited}` : 'N / A'}
               </Text>
               : <Text style={styles.movieInformationValue}>
-                {budgetEdited ? budgetEdited : 'N / A'}
+                {budgetEdited && budgetEdited !== undefined ? budgetEdited : 'N / A'}
               </Text>}
             <Text style={styles.movieInformationTitle}>{category === 'Movies' ? 'Revenue' : 'Status'}</Text>
             {category === 'Movies'
               ? <Text style={styles.movieInformationValue}>
-                {(revenueEdited !== 0 && !showLoader) ? `$${revenueEdited}` : 'N / A'}
+                {(revenueEdited !== 0 && revenueEdited !== undefined && !showLoader) ? `$${revenueEdited}` : 'N / A'}
               </Text>
               : <Text style={styles.movieInformationValue}>
-                {revenueEdited ? revenueEdited : 'N / A'}
+                {revenueEdited && revenueEdited !== undefined ? revenueEdited : 'N / A'}
               </Text>}
           </View>
         </View>
@@ -80,9 +80,7 @@ class Details extends Component {
         {showTrailer && trailerId !== '' && <WebView
           style={{ height: 300, padding: 0, margin: 0, alignSelf: "stretch" }}
           source={{
-            html: `<iframe width="100%" height="100%" 
-            src="https://www.youtube.com/embed/${trailerId}?cc_lang_pref=en"
-             allow="autoplay; encrypted-media" frameborder="0" allowfullscreen></iframe>`
+            uri: `https://www.youtube.com/embed/${trailerId}?cc_lang_pref=en&autoplay=true`
           }}
         />}
 
